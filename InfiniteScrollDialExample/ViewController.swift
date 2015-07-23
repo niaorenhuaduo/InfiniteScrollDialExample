@@ -4,7 +4,7 @@
 //
 //  Created by sugar on 23/7/15.
 //  Copyright (c) 2015 Konstantinos Hondros. All rights reserved.
-//
+///
 
 import Cocoa
 
