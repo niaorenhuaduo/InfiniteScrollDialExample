@@ -12,6 +12,8 @@
 		995644B31B6161BE006767D9 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 995644B21B6161BE006767D9 /* Images.xcassets */; };
 		995644B61B6161BE006767D9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 995644B41B6161BE006767D9 /* Main.storyboard */; };
 		995644C21B6161BF006767D9 /* InfiniteScrollDialExampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 995644C11B6161BF006767D9 /* InfiniteScrollDialExampleTests.swift */; };
+		995644CE1B6161FC006767D9 /* InfiniteScrollDial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 995644CC1B6161FC006767D9 /* InfiniteScrollDial.swift */; };
+		995644CF1B6161FC006767D9 /* InfiniteScrollUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 995644CD1B6161FC006767D9 /* InfiniteScrollUnit.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +36,8 @@
 		995644BB1B6161BF006767D9 /* InfiniteScrollDialExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = InfiniteScrollDialExampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		995644C01B6161BF006767D9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		995644C11B6161BF006767D9 /* InfiniteScrollDialExampleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfiniteScrollDialExampleTests.swift; sourceTree = "<group>"; };
+		995644CC1B6161FC006767D9 /* InfiniteScrollDial.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfiniteScrollDial.swift; sourceTree = "<group>"; };
+		995644CD1B6161FC006767D9 /* InfiniteScrollUnit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfiniteScrollUnit.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +64,7 @@
 				995644AB1B6161BE006767D9 /* InfiniteScrollDialExample */,
 				995644BE1B6161BF006767D9 /* InfiniteScrollDialExampleTests */,
 				995644AA1B6161BE006767D9 /* Products */,
+				995644CB1B6161FC006767D9 /* InfiniteScrollDial */,
 			);
 			sourceTree = "<group>";
 		};
@@ -107,6 +112,15 @@
 				995644C01B6161BF006767D9 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		995644CB1B6161FC006767D9 /* InfiniteScrollDial */ = {
+			isa = PBXGroup;
+			children = (
+				995644CC1B6161FC006767D9 /* InfiniteScrollDial.swift */,
+				995644CD1B6161FC006767D9 /* InfiniteScrollUnit.swift */,
+			);
+			path = InfiniteScrollDial;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -208,8 +222,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				995644CF1B6161FC006767D9 /* InfiniteScrollUnit.swift in Sources */,
 				995644B11B6161BE006767D9 /* ViewController.swift in Sources */,
 				995644AF1B6161BE006767D9 /* AppDelegate.swift in Sources */,
+				995644CE1B6161FC006767D9 /* InfiniteScrollDial.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -400,6 +416,7 @@
 				995644C71B6161BF006767D9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		995644C81B6161BF006767D9 /* Build configuration list for PBXNativeTarget "InfiniteScrollDialExampleTests" */ = {
 			isa = XCConfigurationList;
@@ -408,6 +425,7 @@
 				995644CA1B6161BF006767D9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

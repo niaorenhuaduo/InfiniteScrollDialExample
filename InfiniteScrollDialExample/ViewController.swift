@@ -8,20 +8,58 @@
 
 import Cocoa
 
-class ViewController: NSViewController {
-
+class ViewController: NSViewController, InfiniteScrollDialDelegate {
+    
+    
+    // MARK: - Properties
+    
+    @IBOutlet weak var scrollDialView: InfiniteScrollDial!
+    
+    @IBOutlet weak var scrollDialValue: NSTextField!
+    
+    @IBOutlet weak var newValueToSet: NSTextField!
+    
+    @IBOutlet weak var newMinValue: NSTextField!
+    
+    @IBOutlet weak var newMaxValue: NSTextField!
+    
+    
+    // MARK: - Actions
+    
+    @IBAction func buttonSetDidpress(sender: AnyObject) {
+        self.scrollDialView.setDialValue(value: self.newValueToSet.floatValue)
+    }
+    
+    @IBAction func setMinValueDidPress(sender: AnyObject) {
+        self.scrollDialView.setMinValue(value: self.newMinValue.integerValue)
+    }
+    
+    @IBAction func setMaxValueDidPress(sender: AnyObject) {
+        self.scrollDialView.setMaxValue(value: self.newMaxValue.integerValue)
+    }
+    
+    
+    // MARK: - Methods
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        self.view.wantsLayer = true
+        self.scrollDialView!.delegate = self
+        
     }
-
+    
+    // Method from INScrollDialViewDelegate
+    
+    func dialValueDidChange(value newValue: Float) {
+        self.scrollDialValue.stringValue = NSString(format: "%.2f", newValue) as String
+    }
+    
     override var representedObject: AnyObject? {
         didSet {
-        // Update the view, if already loaded.
+            // Update the view, if already loaded.
         }
     }
-
 
 }
 
