@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15F34" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="10116"/>
+        <capability name="box content view" minToolsVersion="7.0"/>
     </dependencies>
     <scenes>
         <!--Application-->
@@ -676,7 +677,7 @@
                         <subviews>
                             <box autoresizesSubviews="NO" fixedFrame="YES" title="Set new value to dial" borderType="line" translatesAutoresizingMaskIntoConstraints="NO" id="GDm-44-j5o">
                                 <rect key="frame" x="220" y="16" width="175" height="87"/>
-                                <view key="contentView">
+                                <view key="contentView" id="WRb-QJ-YlR">
                                     <rect key="frame" x="1" y="1" width="173" height="71"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
@@ -728,7 +729,7 @@
                             </box>
                             <box autoresizesSubviews="NO" fixedFrame="YES" title="Set Minimum And Maximum Values" borderType="line" translatesAutoresizingMaskIntoConstraints="NO" id="EJW-xr-QwF">
                                 <rect key="frame" x="406" y="16" width="222" height="87"/>
-                                <view key="contentView">
+                                <view key="contentView" id="zco-ND-BHz">
                                     <rect key="frame" x="1" y="1" width="220" height="71"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>

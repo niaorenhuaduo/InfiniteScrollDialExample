@@ -83,7 +83,7 @@ class InfiniteScrollUnit: NSView {
             
             let textTextContent = NSString(string: String(self.value))
             let textStyle = NSParagraphStyle.defaultParagraphStyle().mutableCopy() as! NSMutableParagraphStyle
-            textStyle.alignment = NSTextAlignment.CenterTextAlignment
+            textStyle.alignment = NSTextAlignment.Center
             
             let textFontAttributes = [NSFontAttributeName: NSFont.systemFontOfSize(25), NSForegroundColorAttributeName: NSColor.blackColor(), NSParagraphStyleAttributeName: textStyle]
             
@@ -101,7 +101,7 @@ class InfiniteScrollUnit: NSView {
         
         CGContextSetStrokeColorWithColor(context, color.CGColor)
         CGContextSetLineWidth(context, width)
-        CGContextSetLineCap(context, kCGLineCapRound)
+        CGContextSetLineCap(context, CGLineCap.Round)
         CGContextMoveToPoint(context, pointX, 0)
         CGContextAddLineToPoint(context, pointX , height)
         CGContextStrokePath(context)
