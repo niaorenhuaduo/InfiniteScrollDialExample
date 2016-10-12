@@ -55,11 +55,6 @@ class ViewController: NSViewController, InfiniteScrollDialDelegate {
         self.scrollDialValue.stringValue = NSString(format: "%.2f", newValue) as String
     }
     
-    override var representedObject: AnyObject? {
-        didSet {
-            // Update the view, if already loaded.
-        }
-    }
 
 }
 

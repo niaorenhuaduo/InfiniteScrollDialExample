@@ -55,10 +55,10 @@ class InfiniteScrollDial: NSScrollView {
         // Comment next group if you dont like gradient mask
         let gradient: CAGradientLayer = CAGradientLayer()
         gradient.colors = [
-            NSColor(red: 0, green: 0, blue: 0, alpha: 0.0).CGColor,
-            NSColor(red: 0, green: 0, blue: 0, alpha: 1).CGColor,
-            NSColor(red: 0, green: 0, blue: 0, alpha: 1).CGColor,
-            NSColor(red: 0, green: 0, blue: 0, alpha: 0.0).CGColor]
+            NSColor(red: 0, green: 0, blue: 0, alpha: 0.0).cgColor,
+            NSColor(red: 0, green: 0, blue: 0, alpha: 1).cgColor,
+            NSColor(red: 0, green: 0, blue: 0, alpha: 1).cgColor,
+            NSColor(red: 0, green: 0, blue: 0, alpha: 0.0).cgColor]
         
         gradient.locations = [0.0 , 0.3, 0.7, 1]
         gradient.startPoint = CGPoint(x: 0.0, y: 1.0)
@@ -67,7 +67,7 @@ class InfiniteScrollDial: NSScrollView {
         self.layer!.mask = gradient
         
         // Container view create
-        self.unitContainerView = NSView(frame: CGRectMake(0, 0, 4000, self.frame.height))
+        self.unitContainerView = NSView(frame: CGRect(x: 0, y: 0, width: 4000, height: self.frame.height))
         
         // Limits
         self.minValue = -1000
@@ -78,11 +78,11 @@ class InfiniteScrollDial: NSScrollView {
         //self.hasVerticalScroller = false
 
         // Set elasticities
-        self.verticalScrollElasticity = .None
-        self.horizontalScrollElasticity = .Allowed
+        self.verticalScrollElasticity = .none
+        self.horizontalScrollElasticity = .allowed
         
         // Set background color behind dial
-        self.backgroundColor = NSColor.whiteColor()
+        self.backgroundColor = NSColor.white
         
         // Set the container view as documentView
         self.documentView = self.unitContainerView
@@ -93,7 +93,7 @@ class InfiniteScrollDial: NSScrollView {
         
         // Set continuously notification
         self.postsBoundsChangedNotifications = true
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(InfiniteScrollDial.boundsDidChange), name: NSViewBoundsDidChangeNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(InfiniteScrollDial.boundsDidChange), name: NSNotification.Name.NSViewBoundsDidChange, object: nil)
         
     }
     
@@ -167,9 +167,9 @@ class InfiniteScrollDial: NSScrollView {
         if documentVisibleRect.midX < contentWidth * 0.25 || documentVisibleRect.midX > contentWidth * 0.75 {
             let driftOffset = centerOffsetX - self.contentView.bounds.origin.x
             
-            dispatch_async(dispatch_get_main_queue(), {
+            DispatchQueue.main.async(execute: {
                 self.driftLock = true;
-                self.documentView!.scrollPoint(NSMakePoint(centerOffsetX, 0))
+                self.documentView!.scroll(NSMakePoint(centerOffsetX, 0))
                 for unit in self.visibleUnits {
                     unit.frame.origin.x += driftOffset
                 }
@@ -193,8 +193,8 @@ class InfiniteScrollDial: NSScrollView {
         if firstUnit!.frame.origin.x > 0 + pixelsIntervalToCenter {
             self.driftLock = true
             
-            dispatch_async(dispatch_get_main_queue(), {
-                self.documentView!.scrollPoint(NSMakePoint(self.documentVisibleRect.minX - firstUnit!.frame.minX + pixelsIntervalToCenter, 0))
+            DispatchQueue.main.async(execute: {
+                self.documentView!.scroll(NSMakePoint(self.documentVisibleRect.minX - firstUnit!.frame.minX + pixelsIntervalToCenter, 0))
                 var i: Int = 0
                 for unit in self.visibleUnits {
                     let originX: CGFloat = CGFloat(i) * unit.frame.size.width
@@ -221,8 +221,8 @@ class InfiniteScrollDial: NSScrollView {
         if lastUnit!.frame.origin.x < ( contentWidth - lastUnit!.frame.size.width) - pixelsIntervalToCenter {
             self.driftLock = true
             
-            dispatch_async(dispatch_get_main_queue(), {
-                self.documentView!.scrollPoint(NSMakePoint(( contentWidth + (self.documentVisibleRect.maxX - lastUnit!.frame.maxX) ) - self.frame.size.width - pixelsIntervalToCenter, 0))
+            DispatchQueue.main.async(execute: {
+                self.documentView!.scroll(NSMakePoint(( contentWidth + (self.documentVisibleRect.maxX - lastUnit!.frame.maxX) ) - self.frame.size.width - pixelsIntervalToCenter, 0))
                 var i: Int = 0
                 for unit in self.visibleUnits {
                     let originX: CGFloat = contentWidth - ( CGFloat(self.visibleUnits.count) * unit.frame.size.width) + (CGFloat(i) * unit.frame.size.width)
@@ -235,14 +235,14 @@ class InfiniteScrollDial: NSScrollView {
         }
     }
     
-    func insertUnit(value: Int) -> InfiniteScrollUnit {
-        let unit: InfiniteScrollUnit = InfiniteScrollUnit(frame: CGRectMake(0, 0, 200, self.unitContainerView.frame.height))
+    func insertUnit(_ value: Int) -> InfiniteScrollUnit {
+        let unit: InfiniteScrollUnit = InfiniteScrollUnit(frame: CGRect(x: 0, y: 0, width: 200, height: self.unitContainerView.frame.height))
         unit.value = value
         self.unitContainerView.addSubview(unit)
         return unit
     }
     
-    func placeNewUnitOnRight(rightEdge: CGFloat) -> CGFloat {
+    func placeNewUnitOnRight(_ rightEdge: CGFloat) -> CGFloat {
         
         let previousUnit = self.visibleUnits.last
         var newUnitValue: Int!
@@ -262,11 +262,11 @@ class InfiniteScrollDial: NSScrollView {
         return frame.maxX
     }
     
-    func placeNewUnitOnLeft(leftEdge: CGFloat) -> CGFloat {
+    func placeNewUnitOnLeft(_ leftEdge: CGFloat) -> CGFloat {
         
         let nextUnit = self.visibleUnits.first
         let unit = self.insertUnit(nextUnit!.value - 1)
-        self.visibleUnits.insert(unit, atIndex: 0)
+        self.visibleUnits.insert(unit, at: 0)
         var frame: CGRect = unit.frame
         frame.origin.x = leftEdge - frame.size.width
         frame.origin.y = 0
@@ -312,13 +312,13 @@ class InfiniteScrollDial: NSScrollView {
         while firstUnit!.frame.maxX < documentVisibleRect.minX {
             //println("Remove unit from right side")
             firstUnit!.removeFromSuperview()
-            self.visibleUnits.removeAtIndex(0)
+            self.visibleUnits.remove(at: 0)
             firstUnit = self.visibleUnits[0]
         }
     }
     
     func scrollToPointX(X x: CGFloat) {
-        self.documentView!.scrollPoint(NSMakePoint(x, 0))
+        self.documentView!.scroll(NSMakePoint(x, 0))
     }
     
     func valueInCenter() -> Float {
@@ -362,10 +362,10 @@ class InfiniteScrollDial: NSScrollView {
                 
                 let firstUnitPixelInterval = self.visibleUnits.first!.frame.size.width * firstUnitOffsetMultiplier
 
-                dispatch_async(dispatch_get_main_queue(), {
-                    self.documentView!.scrollPoint(NSMakePoint(centerOffsetX, 0))
-                    self.visibleUnits.removeAll(keepCapacity: true)
-                    self.unitContainerView.subviews.removeAll(keepCapacity: true)
+                DispatchQueue.main.async(execute: {
+                    self.documentView!.scroll(NSMakePoint(centerOffsetX, 0))
+                    self.visibleUnits.removeAll(keepingCapacity: true)
+                    self.unitContainerView.subviews.removeAll(keepingCapacity: true)
                     let unit = self.insertUnit(valueForFirstUnit)
                     self.visibleUnits.append(unit)
                     var frame: CGRect = unit.frame
@@ -381,12 +381,12 @@ class InfiniteScrollDial: NSScrollView {
                 let firstUnitOriginX = self.unitContainerView.frame.size.width - ((CGFloat(self.maxValue) + balanceToCenter) - firstUnitValue + 0.5) * self.visibleUnits.first!.frame.size.width
                 let offsetToLeftEdge = ( valueInLeftEdge - firstUnitValue + 0.5 ) * self.visibleUnits.first!.frame.size.width
 
-                dispatch_async(dispatch_get_main_queue(), {
+                DispatchQueue.main.async(execute: {
                     self.driftLock = true
-                    self.documentView!.scrollPoint(NSMakePoint(round(firstUnitOriginX + offsetToLeftEdge), 0))
+                    self.documentView!.scroll(NSMakePoint(round(firstUnitOriginX + offsetToLeftEdge), 0))
                     
-                    self.visibleUnits.removeAll(keepCapacity: true)
-                    self.unitContainerView.subviews.removeAll(keepCapacity: true)
+                    self.visibleUnits.removeAll(keepingCapacity: true)
+                    self.unitContainerView.subviews.removeAll(keepingCapacity: true)
                     
                     let unit = self.insertUnit(Int(firstUnitValue))
                     
@@ -422,13 +422,13 @@ class InfiniteScrollDial: NSScrollView {
                     firstUnitValueOriginX = documentFirstValueOriginX
                 }
 
-                dispatch_async(dispatch_get_main_queue(), {
+                DispatchQueue.main.async(execute: {
                     
                     self.driftLock = true
-                    self.documentView!.scrollPoint(NSMakePoint(documentOffsetPixels, 0))
+                    self.documentView!.scroll(NSMakePoint(documentOffsetPixels, 0))
 
-                    self.visibleUnits.removeAll(keepCapacity: true)
-                    self.unitContainerView.subviews.removeAll(keepCapacity: true)
+                    self.visibleUnits.removeAll(keepingCapacity: true)
+                    self.unitContainerView.subviews.removeAll(keepingCapacity: true)
 
                     let unit = self.insertUnit(Int(firstUnitValue))
                     

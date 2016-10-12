@@ -37,15 +37,15 @@ class InfiniteScrollUnit: NSView {
     
     // MARK: - Draw Content
     
-    override func drawRect(dirtyRect: NSRect) {
+    override func draw(_ dirtyRect: NSRect) {
         
         // Colors
         
         //let color = NSColor(calibratedRed: 0.405, green: 0.694, blue: 0.914, alpha: 1)
-        let color = NSColor.whiteColor()
+        let color = NSColor.white
         
         // Get current context
-        let context = NSGraphicsContext.currentContext()!.CGContext
+        let context = NSGraphicsContext.current()!.cgContext
         
         
         
@@ -67,11 +67,11 @@ class InfiniteScrollUnit: NSView {
             if i != Int(ticks) / 2 {
                 tickHeight = self.frame.height * 0.2
                 tickWidth = 2
-                tickColor = NSColor.orangeColor()
+                tickColor = NSColor.orange
             } else {
                 tickHeight = self.frame.height * 0.3
                 tickWidth = 2
-                tickColor = NSColor.blackColor()
+                tickColor = NSColor.black
             }
             
             self.drawTick(context, pointX: CGFloat(i) * space, width: tickWidth, height: tickHeight, color: tickColor)
@@ -82,29 +82,29 @@ class InfiniteScrollUnit: NSView {
             let textRect = NSMakeRect(self.frame.width / 2 - 40, self.frame.height * 0.4, 80, 40)
             
             let textTextContent = NSString(string: String(self.value))
-            let textStyle = NSParagraphStyle.defaultParagraphStyle().mutableCopy() as! NSMutableParagraphStyle
-            textStyle.alignment = NSTextAlignment.Center
+            let textStyle = NSParagraphStyle.default().mutableCopy() as! NSMutableParagraphStyle
+            textStyle.alignment = NSTextAlignment.center
             
-            let textFontAttributes = [NSFontAttributeName: NSFont.systemFontOfSize(25), NSForegroundColorAttributeName: NSColor.blackColor(), NSParagraphStyleAttributeName: textStyle]
+            let textFontAttributes = [NSFontAttributeName: NSFont.systemFont(ofSize: 25), NSForegroundColorAttributeName: NSColor.black, NSParagraphStyleAttributeName: textStyle]
             
-            let textTextHeight: CGFloat = textTextContent.boundingRectWithSize(NSMakeSize(textRect.width, CGFloat.infinity), options: NSStringDrawingOptions.UsesLineFragmentOrigin, attributes: textFontAttributes).size.height
+            let textTextHeight: CGFloat = textTextContent.boundingRect(with: NSMakeSize(textRect.width, CGFloat.infinity), options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: textFontAttributes).size.height
             let textTextRect: NSRect = NSMakeRect(textRect.minX, textRect.minY + (textRect.height - textTextHeight) / 2, textRect.width, textTextHeight)
             
             NSGraphicsContext.saveGraphicsState()
             NSRectClip(textRect)
-            textTextContent.drawInRect(NSOffsetRect(textTextRect, 0, 0), withAttributes: textFontAttributes)
+            textTextContent.draw(in: NSOffsetRect(textTextRect, 0, 0), withAttributes: textFontAttributes)
             NSGraphicsContext.restoreGraphicsState()
         }
     }
     
-    func drawTick(context: CGContextRef, pointX: CGFloat, width: CGFloat, height: CGFloat, color: NSColor) {
+    func drawTick(_ context: CGContext, pointX: CGFloat, width: CGFloat, height: CGFloat, color: NSColor) {
         
-        CGContextSetStrokeColorWithColor(context, color.CGColor)
-        CGContextSetLineWidth(context, width)
-        CGContextSetLineCap(context, CGLineCap.Round)
-        CGContextMoveToPoint(context, pointX, 0)
-        CGContextAddLineToPoint(context, pointX , height)
-        CGContextStrokePath(context)
+        context.setStrokeColor(color.cgColor)
+        context.setLineWidth(width)
+        context.setLineCap(CGLineCap.round)
+        context.move(to: CGPoint(x: pointX, y: 0))
+        context.addLine(to: CGPoint(x: pointX, y: height))
+        context.strokePath()
     }
 
 }
